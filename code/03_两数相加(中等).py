@@ -4,7 +4,7 @@
 请你将两个数相加，并以相同形式返回一个表示和的链表。
 你可以假设除了数字 0 之外，这两个数都不会以 0开头。
 """
-""" NO.1 利用链表执行:
+""" NO.1 利用链表执行:    88ms    15MB
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         head = ListNode(l1.val+l2.val)
@@ -20,7 +20,7 @@ class Solution:
             cur.val %=10
         return head
 """
-""" NO.2 利用递归执行:
+""" NO.2 利用递归执行:    68ms    15MB
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         def addTwo(a,b,integer):
