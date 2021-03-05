@@ -4,20 +4,30 @@
 请你将两个数相加，并以相同形式返回一个表示和的链表。
 你可以假设除了数字 0 之外，这两个数都不会以 0开头。
 """
-
-
+""" NO.1 利用链表执行:
 class Solution:
-    @staticmethod
-    def addTwoNumbers(l1, l2):
-        s1 = ''
-        s2 = ''
-        for i in l1:
-            s1 += str(i)
-        for i in l2:
-            s2 += str(i)
-        return int(s1[::-1]) + int(s2[::-1])
-
-
-l1 = [2, 4, 3]
-l2 = [5, 6, 4]
-print(Solution.addTwoNumbers(l1, l2))
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        head = ListNode(l1.val+l2.val)
+        cur = head
+        while l1.next or l2.next:
+            l1 = l1.next if l1.next else ListNode()
+            l2 = l2.next if l2.next else ListNode()
+            cur.next = ListNode(l1.val + l2.val + cur.val//10)
+            cur.val %= 10
+            cur = cur.next
+        if cur.val >=10:
+            cur.next = ListNode(cur.val//10)
+            cur.val %=10
+        return head
+"""
+""" NO.2 利用递归执行:
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        def addTwo(a,b,integer):
+            if not a and not b and not integer :return
+            s = (a.val if a else 0)+(b.val if b else 0)+integer
+            head = ListNode(s%10)
+            head.next = addTwo(a.next if a else None,b.next if b else None,s//10)
+            return head
+        return addTwo(l1,l2,0)
+"""
